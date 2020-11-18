@@ -3,4 +3,6 @@ class User < ApplicationRecord
     has_many :rxes, through: :selectedrxes
     has_many :comments
     has_many :rxes, through: :comments
+
+    has_secure_password
 end
