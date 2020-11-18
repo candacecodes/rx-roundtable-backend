@@ -1,0 +1,2 @@
+class SelectedrxesController < ApplicationController
+end

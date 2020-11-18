@@ -1,0 +1,2 @@
+class Selectedrx < ApplicationRecord
+end

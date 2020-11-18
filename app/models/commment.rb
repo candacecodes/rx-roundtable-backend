@@ -1,0 +1,2 @@
+class Commment < ApplicationRecord
+end
