@@ -5,4 +5,7 @@ class User < ApplicationRecord
     has_many :rxes, through: :comments
 
     has_secure_password
+
+    validates :username, uniqueness: true
+
 end
