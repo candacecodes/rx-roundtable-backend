@@ -1,4 +1,4 @@
 class Selectedrx < ApplicationRecord
     belongs_to :user
-    belongs_to :rxes 
+    belongs_to :rx
 end
