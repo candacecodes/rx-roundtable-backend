@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+skip_before_action :authorized, only: [:create]
+
+    def profile
+        render json: { user: UserSerializer.new(current_user) }, status: :accepted
+    end
 
     def show
         if user 
@@ -37,7 +42,7 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:username, :password)
+        params.permit(:username, :password)
     end
 
     def find_user
