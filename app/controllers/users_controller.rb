@@ -14,6 +14,7 @@ skip_before_action :authorized, only: [:create]
     end
 
     def create
+        byebug
         @user = User.create(user_params)
         if @user.valid?
           @token = encode_token(user_id: @user.id)
@@ -25,6 +26,7 @@ skip_before_action :authorized, only: [:create]
 
 # LOGGING IN
   def login
+    byebug
     @user = User.find_by(username: params[:username])
 
     if @user && @user.authenticate(params[:password])
@@ -54,8 +56,10 @@ skip_before_action :authorized, only: [:create]
 
     private
     def user_params
-        params.permit(:username, :password)
+        params.permit(:username, :password, :user)
     end
+    # params.require(:project).permit(:name,  project_criteria: [:name, :type, :benefit] )
+
 
     def find_user
         user = User.find(params[:id])
