@@ -14,13 +14,13 @@ skip_before_action :authorized, only: [:create]
     end
 
     def create
-        byebug
+        byebug 
         @user = User.create(user_params)
         if @user.valid?
           @token = encode_token(user_id: @user.id)
           render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
         else
-          render json: { error: 'failed to create user' }, status: :not_acceptable
+          render json: { error: @user.errors.full_messages }, status: :not_acceptable
         end
       end
 
@@ -56,7 +56,7 @@ skip_before_action :authorized, only: [:create]
 
     private
     def user_params
-        params.permit(:username, :password, :user)
+        params.require(:user).permit(:username, :password)
     end
     # params.require(:project).permit(:name,  project_criteria: [:name, :type, :benefit] )
 
