@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 skip_before_action :authorized, only: [:create]
 
     def profile
-        render json: { user: UserSerializer.new(current_user) }, status: :accepted
+        render json: {user: UserSerializer.new(@user)}, status: :accepted
     end
 
     def show
@@ -26,7 +26,6 @@ skip_before_action :authorized, only: [:create]
 
 # LOGGING IN
   def login
-    byebug
     @user = User.find_by(username: params[:username])
 
     if @user && @user.authenticate(params[:password])
