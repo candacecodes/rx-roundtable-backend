@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
 skip_before_action :authorized, only: [:create]
 
+    def index 
+        users = User.all 
+        render json: users 
+    end 
+
+
     def profile
         render json: {user: UserSerializer.new(@user)}, status: :accepted
     end
@@ -14,7 +20,6 @@ skip_before_action :authorized, only: [:create]
     end
 
     def create
-        byebug 
         @user = User.create(user_params)
         if @user.valid?
           @token = encode_token(user_id: @user.id)
@@ -55,7 +60,7 @@ skip_before_action :authorized, only: [:create]
 
     private
     def user_params
-        params.require(:user).permit(:username, :password)
+        params.require(:user).permit(:username, :password, :age, :note)
     end
     # params.require(:project).permit(:name,  project_criteria: [:name, :type, :benefit] )
 
