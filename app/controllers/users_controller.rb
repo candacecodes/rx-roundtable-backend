@@ -42,17 +42,17 @@ skip_before_action :authorized, only: [:create]
   end
 
     def update
-        user.update(user_params)
-        if user.valid?
-            render json: user
+        @user.update(user_params)
+        if @user.valid?
+            render json: @user
         else 
             render json: { error: 'user could not be found' }
         end
     end
 
     def destroy
-        if user
-            user.delete
+        if @user
+            @user.delete
         else
             render json: { error: 'user could not be found' }
         end

@@ -5,7 +5,6 @@ class RxesController < ApplicationController
     end
 
     def create
-        byebug
         @rx = Rx.create(rx_params)
         if @rx.valid?
           render json: @rx, status: :created
@@ -18,6 +17,14 @@ class RxesController < ApplicationController
         if rx 
             render json: rx
         else 
+            render json: { error: 'rx could not be found' }
+        end
+    end
+
+    def destroy
+        if @rx
+            @rx.delete
+        else
             render json: { error: 'rx could not be found' }
         end
     end
